@@ -1,0 +1,68 @@
+var fs = require('fs');
+var liste_hotel_restaurant = JSON.parse(fs.readFileSync('hotel_restaurant.json', 'utf8'));
+var liste_michelin = JSON.parse(fs.readFileSync('restaurant_michelin.json', 'utf8'));
+var couple_hotel_restaurant_etoile = [];
+
+console.log(liste_hotel_restaurant)
+
+
+for(var i=0;i<=128;i++)
+{
+    
+    for(var j=0;j<=625;j++)
+    {
+        if(traitement( liste_hotel_restaurant[i]['name']) == traitement( liste_michelin[j]['name']) )
+        {
+            couple_hotel_restaurant_etoile.push( {"name":liste_hotel_restaurant[i]['name'], "price":liste_hotel_restaurant[i]['price'], "lien":liste_hotel_restaurant[i]['lien'] })
+        }
+    }
+}
+console.log(couple_hotel_restaurant_etoile)
+console.log(couple_hotel_restaurant_etoile.length)
+var fs = require('fs');
+    fs.writeFile("./finale-liste.json", JSON.stringify(couple_hotel_restaurant_etoile, null, 4), (err) => {
+  if (err) {
+      console.error(err);
+      return;
+  };
+  console.log("File has been created (finale-liste.json)");
+});
+
+function traitement( phrase )
+{
+    var new_phrase='';
+    phrase = phrase.toLowerCase();
+    for(var i=0;i<phrase.length;i++)
+    {
+        var  compteur=0; 
+        if(phrase[i]=='î' )
+        {
+            new_phrase = new_phrase+'i';compteur++;
+            
+        }
+        if(phrase[i]=='ç' )
+        {
+            new_phrase = new_phrase+'c';compteur++;
+            
+        }
+        if(phrase[i]=='à' || phrase[i]=='â')
+        {
+            new_phrase = new_phrase+'a';compteur++;
+            
+        }
+        if(phrase[i]=='é' || phrase[i]=='è')
+        {
+            new_phrase = new_phrase+'e';compteur++;
+            
+        }
+        if(phrase[i]==' ' || phrase[i]=='/' || phrase[i]=='' )
+        {
+            new_phrase = new_phrase+'';compteur++;
+        }  
+        if(compteur==0)
+        {
+            new_phrase = new_phrase+phrase[i];
+        }
+    }
+    return new_phrase;
+}
