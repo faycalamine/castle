@@ -3,8 +3,6 @@ var liste_hotel_restaurant = JSON.parse(fs.readFileSync('hotel_restaurant.json',
 var liste_michelin = JSON.parse(fs.readFileSync('restaurant_michelin.json', 'utf8'));
 var couple_hotel_restaurant_etoile = [];
 
-console.log(liste_hotel_restaurant)
-
 
 for(var i=0;i<=128;i++)
 {
@@ -17,8 +15,7 @@ for(var i=0;i<=128;i++)
         }
     }
 }
-console.log(couple_hotel_restaurant_etoile)
-console.log(couple_hotel_restaurant_etoile.length)
+
 var fs = require('fs');
     fs.writeFile("./finale-liste.json", JSON.stringify(couple_hotel_restaurant_etoile, null, 4), (err) => {
   if (err) {
@@ -65,4 +62,25 @@ function traitement( phrase )
         }
     }
     return new_phrase;
+}
+
+var http = require('http');
+generate_html();
+http.createServer(function(req, res) {  
+  res.writeHead(200, {
+    'Content-Type': 'text/html'
+  });
+  res.write('<!DOCTYPE html><html><head><style>table {  border-collapse: collapse;  width: 100%;} th, td {  text-align: left;  padding: 8px;} tr:nth-child(even){background-color: #f2f2f2} th {  background-color: #4CAF50;  color: white;} </style></head><body><h2>List of Hotels with a restaurant ranked in the "Guide Michelin 2019</h2><table><tr><th>Name</th><th>Price</th><th>Url Link</th></tr>'+generate_html()+'</table></body></html>');
+  res.end();
+}).listen(8888, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:8888');
+
+function generate_html()
+{ 
+  var chaine="";
+  for(var i=0;i<couple_hotel_restaurant_etoile.length;i++)
+  {
+    chaine=chaine+'<tr><th>'+couple_hotel_restaurant_etoile[i]["name"]+'</th><th>'+ couple_hotel_restaurant_etoile[i]["price"]+'</th><th><a href="'+couple_hotel_restaurant_etoile[i]["lien"]+'">Link</a></th></tr>';
+  }
+  return chaine;
 }
