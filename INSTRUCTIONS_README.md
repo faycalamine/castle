@@ -21,7 +21,7 @@ fichier "script_creation_json_michelin_etoiles.js":
   * retourne le fichier JSON: restaurant_michelin.json	
   
 fichier "index.js":
-  * Aplliquation d'un traitement sur les chaines de caracteres,
+  * Application d'un traitement sur les chaines de caracteres,
     des fichiers  hotel_restaurant.json et restaurant_michelin.json,
     et retournent la liste finale des hotels-restaurants classé au guide michelin
     (via une comparaison)
