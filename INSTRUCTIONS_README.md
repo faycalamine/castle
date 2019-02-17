@@ -1,13 +1,13 @@
 Objectif: Afficher sur une page web la liste des hotels-restaurants(relais chateaux),
 en fonction du prix avec un restaurant classé au guide michelin 2019.
 
-Pour recuperer les prix des hotels-restaurant ansi que la liste des restaurant,
+Pour recuperer les prix des hotels-restaurantS ansi que la liste des restaurantS,
 nous aurons besoin de la librairie puppeteer afin de faire du web scraping.
 
 Dans le but de racourcire la demonstration et étant donné que le web scraping peut se montrer long, 
 (plusieurs tentatives afin que la requete HTTP aboutisse), deux scripts indépendants ont étés créés et retournent,
-deux fichiers json qui seront utlisé dans le fichier index.js,
-qui se chargent de la creation d'une page html. 
+deux fichiers json qui seront utlisés dans le fichier index.js,
+qui se charge de la creation d'une page html. 
 
 
 ****************************************************************************************************
